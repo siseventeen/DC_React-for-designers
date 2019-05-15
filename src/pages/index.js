@@ -3,10 +3,33 @@ import { Link } from "gatsby"
 import Card from "../components/Card"
 import Section from "../components/Section"
 import Wave from "../components/Wave"
+import Cell from "../components/Cell"
+import staticdata from '../../staticdata.json'
+import styled from "styled-components"
+
+
 
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
+
+const SectionCaption = styled.p`
+  font-weight: 600;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #94A4BA;
+  text-align: center;
+`
+const SectionCellGroup = styled.div`
+  max-width: 800px;
+  margin: 0 auto 100px;
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-column-gap:20px;
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+`
 
 const IndexPage = () => (
   <Layout>
@@ -30,6 +53,7 @@ const IndexPage = () => (
 
       <Wave />
       </div>
+    </div>
 
       <div className="Cards">
         <h2>11 courses, more coming</h2>
@@ -66,8 +90,16 @@ const IndexPage = () => (
       Grid CSS, animations, interactions, dynamic data with Contentful and 
       deploying your site with Netlify." />
 
+    <SectionCaption>12 sections - 6 hours</SectionCaption>
+    <SectionCellGroup>
+    {staticdata.cells.map(cell => (
+      <Cell
+      title={cell.title}
+      image={cell.image}
+      />
+      ))}
+    </SectionCellGroup>
 
-    </div>
   </Layout>
 )
 
